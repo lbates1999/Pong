@@ -1,0 +1,31 @@
+from turtle import Turtle, Screen
+import random
+from paddle import Paddle
+
+
+class Ball(Turtle):
+  
+  def __init__(self):
+    super().__init__()
+    self.goto(0, 0)
+    self.shape("circle")
+    self.color("yellow")
+    self.shapesize()
+    self.penup()
+    self.velocity_x = 10
+    self.velocity_y = 10
+
+  def move(self, l_paddle, r_paddle):
+    new_x = self.xcor() + self.velocity_x
+    new_y = self.ycor() + self.velocity_y
+    self.goto(new_x, new_y)
+    if new_y > 290:
+      self.velocity_y *= -1
+    elif new_y < -290:
+      self.velocity_y *= -1
+    if r_paddle.xcor() - 20 < new_x < r_paddle.xcor() + 20 and r_paddle.ycor() - 50 < new_y < r_paddle.ycor() + 50:
+      self.velocity_x *= -1
+    if l_paddle.xcor() - 20 < new_x < l_paddle.xcor() + 20 and l_paddle.ycor() - 50 < new_y < l_paddle.ycor() + 50:
+      self.velocity_x *= -1
+
+
